@@ -7,8 +7,7 @@ import org.junit.platform.commons.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTest {
-
+public class MainTest {
     public static String[] lines =
             {"1 * 2", "asd", "0.123 * 1000 - 100 + (1 * 4)", "1 - 2 + - 1 + 2 +- 1 * 0 + 2 - 1",
             "1000000000000000000000000000 * 1",
@@ -16,7 +15,7 @@ class MainTest {
             "1", "(1 + 9) * (1 + 9) / (40 - 20) + (100 - 50) - (1000 - (50 * 10 * 2))"};
 
     @Test
-    void main() {
+    public void main() {
         Parser parser = new Parser(lines[0]);
         Assertions.assertEquals(parser.parse(), 2);
         System.out.println("First");

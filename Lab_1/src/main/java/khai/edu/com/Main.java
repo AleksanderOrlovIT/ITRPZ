@@ -10,11 +10,12 @@ public class Main{
                     "Please press anything if you want to start the program or press 0 if you want to leave");
             if(sc.nextLine().equals("0")) break;
             System.out.println("PLease input your math expression to count it");
+            Parser parser = new Parser();
             try {
-                Parser parser = new Parser(sc.nextLine());
-                System.out.println("Answear is: " + parser.parse());
+                System.out.println("Answer is: " + parser.evalPostfix(parser.infixToPostfix(sc.nextLine())));
             }
             catch (Exception e) {System.out.println(e);};
+            sc.close();
         }
     }
 }

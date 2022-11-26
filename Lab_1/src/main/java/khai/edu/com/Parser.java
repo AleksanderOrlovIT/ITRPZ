@@ -1,70 +1,120 @@
 package khai.edu.com;
 
-public class Parser implements MathOperations{
+import java.util.Stack;
 
-    int pos = -1, ch;
-    final String str;
-    public Parser ( String str) {
-        this.str = str;
-    }
+public class Parser {
 
-    public void nextChar() {
-        ch = (++pos < str.length()) ? str.charAt(pos) : -1;
-    }
+    public double evalPostfix(String postfixExp){
 
-    public boolean eat(int charToEat) {
-        while (ch == ' ') nextChar();
-        if (ch == charToEat) {
-            nextChar();
-            return true;
+        int index = 0;
+        Stack<Double> arr = new Stack<Double>();
+        double result = 0;
+
+        for(int i = 0; i < postfixExp.length(); i++)
+        {
+            char c = postfixExp.charAt(i);
+            if(c == ' ')
+                continue;
+            else if(Character.isDigit(c))
+            {
+                double x = 0.0;
+                boolean check = true;
+                while(Character.isDigit(c) || c == '.')
+                {
+                    if(c != '.' && check == true){
+                        x = x*10 + (double)(c-'0');
+                        i++;
+                        c = postfixExp.charAt(i);
+                    }
+                    else{
+                        check = false;
+                        x = x + 0.1 + (double)(c-'0')/10;
+                        i++;
+                        c = postfixExp.charAt(i);
+                    }
+                }
+                i--;
+                arr.push(x);
+            }
+            else
+            {
+                double val1 = arr.pop();
+                double val2 = arr.pop();
+                switch(c)
+                {
+                    case '+':
+                        arr.push(addition(val2,val1));
+                        break;
+                    case '-':
+                        arr.push(subtraction(val2,val1));
+                        break;
+                    case '/':
+                        arr.push(division(val2,val1));
+                        break;
+                    case '*':
+                        arr.push(multiplication(val2, val1));
+                        break;
+                    default:
+                        throw new ArithmeticException();
+                }
+            }
         }
-        return false;
+        return arr.pop();
     }
 
-    public double parse() {
-        nextChar();
-        double x = parseExpression();
-        if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
-        return x;
-    }
-
-    public double parseExpression() {
-        double x = parseTerm();
-        for (;;) {
-            if      (eat('+')) x += parseTerm();
-            else if (eat('-')) x -= parseTerm();
-            else return x;
+    public String infixToPostfix(String exp){
+        String result = "";
+        Stack<Character> arr = new Stack<>();
+        for (int i = 0; i <exp.length() ; i++) {
+            char c = exp.charAt(i);
+            if(precedence(c)>0){
+                while(arr.isEmpty()==false && precedence(arr.peek())>=precedence(c)){
+                    result += arr.pop();
+                }
+                result += ' ';
+                arr.push(c);
+            }else if(c==')'){
+                char x = arr.pop();
+                while(x!='('){
+                    result += x;
+                    x = arr.pop();
+                }
+            }else if(c=='('){
+                arr.push(c);
+            }else{
+                result += c;
+            }
         }
-    }
-
-    public double parseTerm() {
-        double x = parseFactor();
-        for (;;) {
-            if      (eat('*')) x *= parseFactor();
-            else if (eat('/')) x /= parseFactor();
-            else return x;
+        for (int i = 0; i <=arr.size() ; i++) {
+            result += arr.pop();
         }
+        return result;
     }
 
-    public double parseFactor() {
-        if (eat('+')) return parseFactor();
-        if (eat('-')) return -parseFactor();
-
-        double x;
-        int startPos = this.pos;
-        if (eat('(')) {
-            x = parseExpression();
-            eat(')');
-        } else if ((ch >= '0' && ch <= '9') || ch == '.') {
-            while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
-            x = Double.parseDouble(str.substring(startPos, this.pos));
-        } else if (ch >= 'a' && ch <= 'z') {
-            while (ch >= 'a' && ch <= 'z') nextChar();
-            String func = str.substring(startPos, this.pos);
-            x = parseFactor();
-        } else {
-            throw new RuntimeException("Unexpected: " + (char)ch);
+    static int precedence(char c){
+        switch (c){
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
         }
-        return x;
+        return -1;
     }
+
+    private double division (double value1, double value2) {
+        if (value2 == 0) return Double.POSITIVE_INFINITY;
+        else return value1/value2;
+    }
+    private double addition (double value1, double value2) {
+        return value1 + value2;
+    }
+    private double multiplication (double value1, double value2) {
+        return value1 * value2;
+    }
+    private double subtraction (double value1, double value2) {
+        return value1 - value2;
+    }
+
 }

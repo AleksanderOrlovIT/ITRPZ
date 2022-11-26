@@ -2,7 +2,7 @@ package khai.edu.com;
 
 import java.util.Stack;
 
-public class Parser {
+public class Parser implements MathOperations{
 
     public double evalPostfix(String postfixExp){
 
@@ -103,17 +103,17 @@ public class Parser {
         return -1;
     }
 
-    private double division (double value1, double value2) {
+    public double division(double value1, double value2) {
         if (value2 == 0) return Double.POSITIVE_INFINITY;
         else return value1/value2;
     }
-    private double addition (double value1, double value2) {
+    public double addition (double value1, double value2) {
         return value1 + value2;
     }
-    private double multiplication (double value1, double value2) {
+    public double multiplication (double value1, double value2) {
         return value1 * value2;
     }
-    private double subtraction (double value1, double value2) {
+    public double subtraction (double value1, double value2) {
         return value1 - value2;
     }
 

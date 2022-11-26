@@ -14,8 +14,8 @@ public class Main{
             try {
                 System.out.println("Answer is: " + parser.evalPostfix(parser.infixToPostfix(sc.nextLine())));
             }
-            catch (Exception e) {System.out.println(e);};
-            sc.close();
+            catch (Exception e) {System.out.println(e);}
         }
+        sc.close();
     }
 }

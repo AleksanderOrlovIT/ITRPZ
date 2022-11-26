@@ -16,38 +16,38 @@ public class MainTest {
 
     @Test
     public void main() {
-        Parser parser = new Parser(lines[0]);
-        Assertions.assertEquals(parser.parse(), 2);
+        Parser parser = new Parser();
+        Assertions.assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[0])), 2.0);
         System.out.println("First");
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {new Parser(lines[1]).parse();});
+        /*Exception exception = assertThrows(RuntimeException.class, () -> {new Parser().evalPostfix(new Parser().infixToPostfix(lines[1]));});
         String expectedMessage = "Unexpected: \uFFFF";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
-        System.out.println("Second");
+        System.out.println("Second");*/
 
-        parser = new Parser(lines[2]);
-        assertEquals(parser.parse(), 27);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[2])), 27.0);
         System.out.println("Third");
 
-        parser = new Parser(lines[3]);
-        assertEquals(parser.parse(), 1);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[3])), 1.0);
         System.out.println("Fourth");
 
-        parser = new Parser(lines[4]);
-        assertEquals(parser.parse(), 1.0E27);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[4])), 1.0E27);
         System.out.println("Fifth");
 
-        parser = new Parser(lines[5]);
-        assertEquals(parser.parse(), 1.0E-85);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[5])), 1.0E-85);
         System.out.println("Sixth");
 
-        parser = new Parser(lines[6]);
-        assertEquals(parser.parse(), 1);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[6])), 1.0);
         System.out.println("Seventh");
 
-        parser = new Parser(lines[7]);
-        assertEquals(parser.parse(), 55);
+        parser = new Parser();
+        assertEquals(parser.evalPostfix(parser.infixToPostfix(lines[7])), 55.0);
         System.out.println("Last");
     }
 }

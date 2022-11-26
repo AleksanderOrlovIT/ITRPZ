@@ -1,12 +1,8 @@
 package khai.edu.com;
 
-import java.math.BigDecimal;
-
     public interface MathOperations {
-    void nextChar();
-    boolean eat(int charToEat);
-    double parse();
-    double parseExpression();
-    double parseTerm();
-    double parseFactor();
+        double division (double value1, double value2);
+        double addition (double value1, double value2);
+        double multiplication (double value1, double value2);
+        double subtraction (double value1, double value2);
 }

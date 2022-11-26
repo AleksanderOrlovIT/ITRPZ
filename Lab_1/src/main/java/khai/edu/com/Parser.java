@@ -2,7 +2,7 @@ package khai.edu.com;
 
 import java.util.Stack;
 
-public class Parser implements MathOperations{
+public class Parser {
 
     public double evalPostfix(String postfixExp){
 
@@ -17,19 +17,25 @@ public class Parser implements MathOperations{
                 continue;
             else if(Character.isDigit(c))
             {
-                double x = 0.0;
+                double x = 0.0; int k = 1;
                 boolean check = true;
                 while(Character.isDigit(c) || c == '.')
                 {
-                    if(c != '.' && check == true){
+                    if(c != '.' && check){
                         x = x*10 + (double)(c-'0');
                         i++;
                         c = postfixExp.charAt(i);
                     }
                     else{
-                        check = false;
-                        x = x + 0.1 + (double)(c-'0')/10;
+                        if (check) {
+                            check = false;
+                            i++;
+                            c = postfixExp.charAt(i);
+                            continue;
+                        }
+                        x = x + (double)(c-'0')/(10*k);
                         i++;
+                        k = k * 10;
                         c = postfixExp.charAt(i);
                     }
                 }
@@ -103,17 +109,17 @@ public class Parser implements MathOperations{
         return -1;
     }
 
-    public double division(double value1, double value2) {
+    private double division (double value1, double value2) {
         if (value2 == 0) return Double.POSITIVE_INFINITY;
         else return value1/value2;
     }
-    public double addition (double value1, double value2) {
+    private double addition (double value1, double value2) {
         return value1 + value2;
     }
-    public double multiplication (double value1, double value2) {
+    private double multiplication (double value1, double value2) {
         return value1 * value2;
     }
-    public double subtraction (double value1, double value2) {
+    private double subtraction (double value1, double value2) {
         return value1 - value2;
     }
 

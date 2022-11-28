@@ -17,8 +17,9 @@ public class Lab2Main{
                 case 0:
                     break;
                 case 1:
-                    break;
+                    Main.main(args);
             }
+            System.out.println("Everything is good");
             break;
         }
     }

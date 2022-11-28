@@ -1,5 +1,6 @@
-package khai.edu.com;
+package java_parser;
 
+import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class Parser {
@@ -65,7 +66,8 @@ public class Parser {
                 }
             }
         }
-        return arr.pop();
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        return Float.parseFloat(formatter.format(arr.pop()));
     }
 
     public String infixToPostfix(String exp){

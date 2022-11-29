@@ -26,7 +26,7 @@ public class UserDB {
         users[users.length - 1] = user;
     }
 
-    public User createWithId(String id, User user){
+    public User createWithId(String id, User user) {
         user.setId(id);
         users = Arrays.copyOf(users, users.length + 1);
         users[users.length - 1] = user;
@@ -43,11 +43,11 @@ public class UserDB {
     }
 
     public void update(User user) {
-        if(users.length != 0 && findById(user.getId()) != null) {
+        if (users.length != 0 && findById(user.getId()) != null) {
             User current = findById(user.getId());
             current.setName(user.getName());
             current.setAge(user.getAge());
-        }else{
+        } else {
             createWithId(user.getId(), user);
         }
     }
@@ -65,24 +65,23 @@ public class UserDB {
 
     public void delete(String id) {
         User userToDelete = findById(id);
-        int temp = -1;
-        for (int i = 0; i < users.length; i++) {
-            if(users[i].getId().equals(String.valueOf(userToDelete.getId()))){
-                users[i] = null;
-                temp = i;
+        if (findById(id) != null) {
+            int temp = -1;
+            for (int i = 0; i < users.length; i++) {
+                if (users[i].getId().equals(String.valueOf(userToDelete.getId()))) {
+                    users[i] = null;
+                    temp = i;
+                }
             }
+            User tempArray[] = new User[users.length - 1];
+            for (int i = 0; i < temp; i++) {
+                tempArray[i] = users[i];
+            }
+            for (int i = temp; i < tempArray.length; i++) {
+                tempArray[i] = users[i + 1];
+            }
+            users = Arrays.copyOf(tempArray, users.length - 1);
         }
-
-        User tempArray[] = new User[users.length - 1];
-
-        for (int i = 0; i < temp; i++) {
-            tempArray[i] = users[i];
-        }
-
-        for (int i = temp; i < tempArray.length; i++) {
-            tempArray[i] = users[i+1];
-        }
-
-        users = Arrays.copyOf(tempArray, users.length - 1);
+        else System.out.println("No such id");
     }
 }

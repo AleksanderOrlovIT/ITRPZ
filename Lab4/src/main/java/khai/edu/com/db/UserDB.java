@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class UserDB {
-    private User[] users;
+    public User[] users;
     private static UserDB instance;
 
-    private UserDB() {
+    public UserDB() {
         users = new User[0];
     }
 

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Lab2MainModule</artifactId>
+    <artifactId>Lab4</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -21,16 +21,6 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-surefire-provider</artifactId>
             <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>khai.edu.com</groupId>
-            <artifactId>Lab_1</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>khai.edu.com</groupId>
-            <artifactId>Lab4</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -44,17 +34,12 @@
     </properties>
 
     <build>
-        <finalName>lab2MainModule</finalName>
+        <finalName>lab4</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <configuration>
-                    <includes>
-                        <include>Lab2MainTest.java</include>
-                    </includes>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -79,7 +64,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>khai.edu.com.Lab2Main</mainClass>
+                                    <mainClass>khai.edu.com.Lab4Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

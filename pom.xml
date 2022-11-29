@@ -11,6 +11,7 @@
     <modules>
         <module>Lab_1</module>
         <module>Lab2MainModule</module>
+        <module>Lab4</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -8,7 +8,9 @@ public class Main{
         while(true) {
             System.out.println(
                     "Please press anything if you want to start the program or press 0 if you want to leave");
-            if(sc.nextLine().equals("0")) break;
+            if(sc.nextLine().equals("0")) {
+                break;
+            }
             System.out.println("PLease input your math expression to count it");
             Parser parser = new Parser();
             try {
@@ -16,6 +18,5 @@ public class Main{
             }
             catch (Exception e) {System.out.println(e);}
         }
-        sc.close();
     }
 }

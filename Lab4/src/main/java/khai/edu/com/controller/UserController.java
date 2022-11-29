@@ -97,10 +97,10 @@ public class UserController {
         try {
             System.out.println("Please, enter id");
             String id = reader.readLine();
-            if(UserService.findAll().length != 0) {
+            if(UserService.findAll().length != 0 || UserService.findById(id) != null) {
                 UserService.delete(id);
             }
-            else System.out.println("Users empty");
+            else System.out.println("No user with such id");
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -113,7 +113,8 @@ public class UserController {
             String id = reader.readLine();
             if(UserService.findAll().length != 0) {
                 User user = UserService.findById(id);
-                System.out.println("user = " + user);
+                if(user == null) System.out.println("There is no user with such id");
+                else System.out.println("user = " + user);
             }
             else System.out.println("Users empty");
         } catch (IOException e) {

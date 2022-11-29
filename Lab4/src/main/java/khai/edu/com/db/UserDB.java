@@ -26,8 +26,7 @@ public class UserDB {
         users[users.length - 1] = user;
     }
 
-    public User createWithId(String id){
-        User user = new User();
+    public User createWithId(String id, User user){
         user.setId(id);
         users = Arrays.copyOf(users, users.length + 1);
         users[users.length - 1] = user;
@@ -44,12 +43,12 @@ public class UserDB {
     }
 
     public void update(User user) {
-        if(users.length != 0) {
+        if(users.length != 0 && findById(user.getId()) != null) {
             User current = findById(user.getId());
             current.setName(user.getName());
             current.setAge(user.getAge());
         }else{
-            System.out.println("Users empty");
+            createWithId(user.getId(), user);
         }
     }
 
@@ -57,7 +56,7 @@ public class UserDB {
         for (int i = 0; i < users.length; i++) {
             if (id.equals(String.valueOf(users[i].getId()))) return users[i];
         }
-        return createWithId(id);
+        return null;
     }
 
     public User[] findAll() {

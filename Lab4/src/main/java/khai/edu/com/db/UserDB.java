@@ -9,7 +9,7 @@ public class UserDB {
     private User[] users;
     private static UserDB instance;
 
-    private UserDB() {
+    public UserDB() {
         users = new User[0];
     }
 

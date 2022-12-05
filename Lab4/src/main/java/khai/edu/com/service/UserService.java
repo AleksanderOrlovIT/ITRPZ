@@ -7,16 +7,20 @@ public class UserService {
 
     private static final UserDao userDao = new UserDao();
 
-    public static void create(User user) {
-        userDao.create(user);
+    public static User create(User user) {
+        return userDao.create(user);
     }
 
-    public static void update(User user) {
-        userDao.update(user);
+    public static User update(User user) {
+        return userDao.update(user);
     }
 
-    public static void delete(String id) {
-        userDao.delete(id);
+    public static boolean delete(String id) {
+        return userDao.delete(id);
+    }
+
+    public static boolean deleteWithoutId(){
+        return userDao.deleteWithoutId();
     }
 
     public static User findById(String id) {

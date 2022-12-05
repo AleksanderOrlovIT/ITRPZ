@@ -63,7 +63,9 @@ public class UserController {
                     System.out.println("You can type only numbers. PLease try again");
                 }
             }
-            UserService.create(user);
+            user = UserService.create(user);
+            System.out.println(user.getName() + " with age " + user.getAge()
+                    + " has been created with id: " + user.getId());
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -86,21 +88,33 @@ public class UserController {
                     System.out.println("You can type only numbers. PLease try again");
                 }
             }
-            UserService.update(user);
+            user = UserService.update(user);
+            System.out.println(user.getName() + " with age " + user.getAge()
+                    + " has been updated with id: " + user.getId());
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
     }
-
     private void delete(BufferedReader reader) {
         System.out.println("UserController.delete");
         try {
-            System.out.println("Please, enter id");
-            String id = reader.readLine();
-            if(UserService.findAll().length != 0 || UserService.findById(id) != null) {
-                UserService.delete(id);
+            System.out.println("Please choose from this options -->\n1: Delete using id\n2: Delete without id");
+            switch (reader.readLine()) {
+                case "1":
+                    System.out.println("Please, enter id");
+                    String id = reader.readLine();
+                    if (UserService.findAll().length != 0 || UserService.findById(id) != null) {
+                        if(UserService.delete(id)) System.out.println("User has been successfully deleted");
+                        else System.out.println("User has not been deleted");
+                    } else System.out.println("No user with such id");
+                    break;
+                case "2":
+                    if(UserService.deleteWithoutId()) System.out.println("User has been successfully deleted");
+                    else System.out.println("User has not been deleted: users list is empty");
+                    break;
+                default:
+                    System.out.println("Wrong input");
             }
-            else System.out.println("No user with such id");
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }

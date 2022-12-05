@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class UserDB {
-    private User[] users;
+    public User[] users;
     private static UserDB instance;
 
     public UserDB() {
@@ -20,10 +20,12 @@ public class UserDB {
         return instance;
     }
 
-    public void create(User user) {
-        user.setId(generateId());
+    public User create(User user) {
+        if(user.getId() == null)
+            user.setId(generateId());
         users = Arrays.copyOf(users, users.length + 1);
         users[users.length - 1] = user;
+        return user;
     }
 
     public User createWithId(String id, User user) {
@@ -42,13 +44,14 @@ public class UserDB {
         return id;
     }
 
-    public void update(User user) {
+    public User update(User user) {
         if (users.length != 0 && findById(user.getId()) != null) {
             User current = findById(user.getId());
             current.setName(user.getName());
             current.setAge(user.getAge());
+            return current;
         } else {
-            createWithId(user.getId(), user);
+            return createWithId(user.getId(), user);
         }
     }
 
@@ -63,7 +66,7 @@ public class UserDB {
         return users;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         User userToDelete = findById(id);
         if (findById(id) != null) {
             int temp = -1;
@@ -81,7 +84,16 @@ public class UserDB {
                 tempArray[i] = users[i + 1];
             }
             users = Arrays.copyOf(tempArray, users.length - 1);
+            return true;
         }
-        else System.out.println("No such id");
+        else return false;
+    }
+
+    public boolean deleteWithoutId(){
+        if(users.length == 0) return false;
+        else {
+            users = Arrays.copyOf(users, users.length-1);
+            return true;
+        }
     }
 }

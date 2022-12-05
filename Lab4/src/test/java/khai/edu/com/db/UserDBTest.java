@@ -18,7 +18,7 @@ class UserDBTest {
     }
 
     @Test
-    void checkUser(){
+    void checkUser(){ // test user not db
         User rapper = new User();
         rapper.setAge(10);
         rapper.setName("Sasha");

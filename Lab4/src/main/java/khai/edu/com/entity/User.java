@@ -17,7 +17,6 @@ public class User {
         this.age = age;
         this.id = id;
     }
-    
 
     public int getAge() {
         return age;
@@ -46,7 +45,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                    "id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';

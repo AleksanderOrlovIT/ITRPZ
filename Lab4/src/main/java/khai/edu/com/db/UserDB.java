@@ -20,7 +20,6 @@ public class UserDB {
         return instance;
     }
 
-    
     public User create(User user) {
         if(user.getId() == null)
             user.setId(generateId());

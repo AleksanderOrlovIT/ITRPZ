@@ -1,5 +1,7 @@
 package khai.edu.com;
 
+import khai.edu.com.javafx.HelloApplication;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -10,6 +12,7 @@ public class Lab2Main {
         while(flag) {
             System.out.println("Press 1 to start lab1\n" +
                     "Press 4 to start lab4\n" +
+                    "Press 6 to start javaFxLab\n" +
                     "Press 0 to stop the program");
             flag = makeDecision(args, sc.nextLine());
         }
@@ -23,6 +26,8 @@ public class Lab2Main {
             case "4":
                 Lab4Main.main(args);
                 break;
+            case "6":
+                HelloApplication.main(args);
             default:
                 return false;
         }

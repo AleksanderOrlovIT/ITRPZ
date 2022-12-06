@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane fx:controller="khai.edu.com.javafx.HelloController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="CreateButton" layoutX="14.0" layoutY="304.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Create" />
+      <Button fx:id="UpdateButton" layoutX="150.0" layoutY="304.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Update" />
+      <Button fx:id="DeleteButton" layoutX="284.0" layoutY="304.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Delete" />
+      <Button fx:id="FindAllButton" layoutX="428.0" layoutY="304.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="FindAll" />
+      <TextArea fx:id="Output" layoutX="1.0" prefHeight="200.0" prefWidth="600.0" />
+      <TextField fx:id="Name" layoutX="14.0" layoutY="227.0" />
+      <TextField fx:id="Age" layoutX="210.0" layoutY="227.0" />
+      <TextField fx:id="Id" layoutX="395.0" layoutY="227.0" />
+   </children>
+</Pane>
